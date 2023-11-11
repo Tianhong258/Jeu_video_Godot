@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://xqcsp3mhg8v4"]
+[gd_scene load_steps=4 format=3 uid="uid://xqcsp3mhg8v4"]
 
 [ext_resource type="Texture2D" uid="uid://dnuirodxourbg" path="res://Textures/4081217898_b7bae8fdba_z.jpg" id="1_76a5w"]
 [ext_resource type="PackedScene" uid="uid://cxjh2mmyii5f7" path="res://Player/player.tscn" id="1_a4hey"]
+[ext_resource type="PackedScene" uid="uid://dthyqis45nr3k" path="res://Ennemis/ennemi.tscn" id="3_lh57w"]
 
 [node name="World" type="Node2D"]
 
@@ -19,3 +20,10 @@ texture_repeat = 2
 position = Vector2(640, 640)
 scale = Vector2(2, 2)
 texture = ExtResource("1_76a5w")
+
+[node name="Ennemi" parent="." instance=ExtResource("3_lh57w")]
+position = Vector2(708, 60)
+
+[node name="Ennemi2" parent="." instance=ExtResource("3_lh57w")]
+position = Vector2(479, 304)
+speed = 60.0
