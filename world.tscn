@@ -1,15 +1,11 @@
-
-[gd_scene load_steps=4 format=3 uid="uid://xqcsp3mhg8v4"]
-
-
-
-
+[gd_scene load_steps=8 format=3 uid="uid://xqcsp3mhg8v4"]
 
 [ext_resource type="Texture2D" uid="uid://dnuirodxourbg" path="res://Textures/4081217898_b7bae8fdba_z.jpg" id="1_76a5w"]
 [ext_resource type="PackedScene" uid="uid://cxjh2mmyii5f7" path="res://Player/player.tscn" id="1_a4hey"]
 [ext_resource type="Script" path="res://Scrollingstars.gd" id="2_sowbf"]
 [ext_resource type="PackedScene" uid="uid://i044kliyvirg" path="res://Armes/bulle.tscn" id="4_f3ydc"]
-[ext_resource type="PackedScene" uid="uid://dthyqis45nr3k" path="res://Ennemis/ennemi.tscn" id="3_lh57w"]
+[ext_resource type="PackedScene" uid="uid://dthyqis45nr3k" path="res://Ennemis/ennemi.tscn" id="5_xkr1e"]
+
 [sub_resource type="Shader" id="Shader_fadlh"]
 code = "shader_type canvas_item;
 
@@ -51,11 +47,6 @@ offset_left = 47.0
 offset_right = 3047.0
 offset_bottom = 3000.0
 texture = ExtResource("1_76a5w")
+stretch_mode = 1
 
-[node name="Ennemi" parent="." instance=ExtResource("3_lh57w")]
-position = Vector2(708, 60)
-
-[node name="Ennemi2" parent="." instance=ExtResource("3_lh57w")]
-position = Vector2(479, 304)
-speed = 60.0
-
+[node name="Ennemi" parent="." instance=ExtResource("5_xkr1e")]
