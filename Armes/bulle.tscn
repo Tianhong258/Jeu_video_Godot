@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://i044kliyvirg"]
+
+[ext_resource type="Texture2D" uid="uid://cdbvrkpim48w6" path="res://Armes/Bulle.png" id="1_w587h"]
+[ext_resource type="Script" path="res://Armes/bulle.gd" id="1_xwi0b"]
+
+[node name="Missile" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_xwi0b")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Attaque", "Joueur"]]
+texture = ExtResource("1_w587h")

@@ -1,24 +1,55 @@
+
 [gd_scene load_steps=4 format=3 uid="uid://xqcsp3mhg8v4"]
+
+
+
+
 
 [ext_resource type="Texture2D" uid="uid://dnuirodxourbg" path="res://Textures/4081217898_b7bae8fdba_z.jpg" id="1_76a5w"]
 [ext_resource type="PackedScene" uid="uid://cxjh2mmyii5f7" path="res://Player/player.tscn" id="1_a4hey"]
+[ext_resource type="Script" path="res://Scrollingstars.gd" id="2_sowbf"]
+[ext_resource type="PackedScene" uid="uid://i044kliyvirg" path="res://Armes/bulle.tscn" id="4_f3ydc"]
 [ext_resource type="PackedScene" uid="uid://dthyqis45nr3k" path="res://Ennemis/ennemi.tscn" id="3_lh57w"]
+[sub_resource type="Shader" id="Shader_fadlh"]
+code = "shader_type canvas_item;
+
+uniform vec2 direction = vec2(1.0,0.0);
+uniform float speed_scale = 0.02;
+
+void fragment() 
+{
+	vec2 move = direction * TIME * speed_scale;
+	COLOR = texture(TEXTURE,UV + move);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4a47"]
+shader = SubResource("Shader_fadlh")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/speed_scale = 0.1
 
 [node name="World" type="Node2D"]
+
+[node name="Missile" parent="." instance=ExtResource("4_f3ydc")]
+position = Vector2(747, 391)
+speed = 2000.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="Player" parent="Area2D" instance=ExtResource("1_a4hey")]
+position = Vector2(644, 397)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Area2D"]
+[node name="Scrollingstars" type="ParallaxBackground" parent="Area2D"]
+script = ExtResource("2_sowbf")
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Area2D/ParallaxBackground"]
-motion_mirroring = Vector2(1280, 1280)
+[node name="Fond" type="ParallaxLayer" parent="Area2D/Scrollingstars"]
+motion_mirroring = Vector2(3000, 3000)
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D/ParallaxBackground/ParallaxLayer"]
-texture_repeat = 2
-position = Vector2(640, 640)
-scale = Vector2(2, 2)
+[node name="TextureRect" type="TextureRect" parent="Area2D/Scrollingstars/Fond"]
+material = SubResource("ShaderMaterial_a4a47")
+offset_left = 47.0
+offset_right = 3047.0
+offset_bottom = 3000.0
 texture = ExtResource("1_76a5w")
 
 [node name="Ennemi" parent="." instance=ExtResource("3_lh57w")]
@@ -27,3 +58,4 @@ position = Vector2(708, 60)
 [node name="Ennemi2" parent="." instance=ExtResource("3_lh57w")]
 position = Vector2(479, 304)
 speed = 60.0
+
