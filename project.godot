@@ -23,6 +23,7 @@ version_control/autoload_on_startup=true
 [layer_names]
 
 2d_physics/layer_1="hurtbox"
+2d_physics/layer_2="Hitbox"
 
 [rendering]
 

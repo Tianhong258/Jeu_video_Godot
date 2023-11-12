@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dthyqis45nr3k"]
+[gd_scene load_steps=6 format=3 uid="uid://dthyqis45nr3k"]
 
 [ext_resource type="Script" path="res://Ennemis/ennemi.gd" id="1_1pdbx"]
 [ext_resource type="Texture2D" uid="uid://bre0mp28bgk5w" path="res://Ennemis/9938.png_300.png" id="2_rh3v4"]
 [ext_resource type="Script" path="res://Ennemis/Hurtbox.gd" id="3_1s0it"]
+[ext_resource type="AudioStream" uid="uid://bsvprywd4fvuc" path="res://Ennemis/mort.wav" id="3_trepu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x6144"]
 size = Vector2(80, 116)
@@ -14,11 +15,16 @@ script = ExtResource("1_1pdbx")
 position = Vector2(25, 69)
 texture = ExtResource("2_rh3v4")
 
+[node name="Mort" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_trepu")
+
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 2
 script = ExtResource("3_1s0it")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(22, 99)
 shape = SubResource("RectangleShape2D_x6144")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

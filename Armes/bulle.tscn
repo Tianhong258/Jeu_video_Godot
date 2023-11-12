@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://i044kliyvirg"]
+[gd_scene load_steps=6 format=3 uid="uid://i044kliyvirg"]
 
 [ext_resource type="Texture2D" uid="uid://cdbvrkpim48w6" path="res://Armes/Bulle.png" id="1_w587h"]
 [ext_resource type="Script" path="res://Armes/bulle.gd" id="1_xwi0b"]
 [ext_resource type="AudioStream" uid="uid://b35oagqawxgon" path="res://Armes/goute.wav" id="3_2jwan"]
+[ext_resource type="Script" path="res://Util/Hitbox.gd" id="4_y32l1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ntsd6"]
 radius = 14.0357
@@ -22,12 +23,17 @@ stream = ExtResource("3_2jwan")
 volume_db = -14.793
 autoplay = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ntsd6")
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 8.0
 one_shot = true
 autostart = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_y32l1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ntsd6")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
