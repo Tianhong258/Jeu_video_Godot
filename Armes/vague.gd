@@ -1,15 +1,17 @@
 extends CharacterBody2D
-@export var speed = 300.0
-@export var nbHits = 1
+@export var speed = 500.0
+@export var nbHits = 5
+@export var direction:Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func rotate180():
+	rotation_degrees = 180
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	var direction = Vector2(1.0,0.0)
 	velocity = direction * speed
 	move_and_slide()
 

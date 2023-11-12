@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://2u53c63a0pg4"]
+
+[ext_resource type="Script" path="res://Armes/vague.gd" id="1_ow4g6"]
+[ext_resource type="Texture2D" uid="uid://b4s8xp4b5vb1x" path="res://Armes/Vague.png" id="2_7koft"]
+[ext_resource type="AudioStream" uid="uid://b35oagqawxgon" path="res://Armes/goute.wav" id="3_dwtki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy4jy"]
+size = Vector2(86, 10)
+
+[node name="Missile" type="CharacterBody2D"]
+top_level = true
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_ow4g6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["Attaque", "Joueur"]]
+scale = Vector2(3, 1)
+texture = ExtResource("2_7koft")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dwtki")
+volume_db = -14.793
+autoplay = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -5)
+shape = SubResource("RectangleShape2D_sy4jy")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
