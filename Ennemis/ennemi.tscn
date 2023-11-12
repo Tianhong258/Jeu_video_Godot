@@ -1,13 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://dthyqis45nr3k"]
+[gd_scene load_steps=5 format=3 uid="uid://dthyqis45nr3k"]
 
 [ext_resource type="Script" path="res://Ennemis/ennemi.gd" id="1_1pdbx"]
 [ext_resource type="Texture2D" uid="uid://bre0mp28bgk5w" path="res://Ennemis/9938.png_300.png" id="2_rh3v4"]
+[ext_resource type="Script" path="res://Ennemis/Hurtbox.gd" id="3_1s0it"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6144"]
+size = Vector2(80, 116)
 
 [node name="Ennemi" type="CharacterBody2D"]
 script = ExtResource("1_1pdbx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="MosterRabbit" type="Sprite2D" parent="."]
 position = Vector2(25, 69)
 texture = ExtResource("2_rh3v4")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_1s0it")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(22, 99)
+shape = SubResource("RectangleShape2D_x6144")

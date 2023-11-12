@@ -12,7 +12,7 @@ func _physics_process(delta):
 	velocity = direction*speed
 	move_and_slide()
 	
-func health_control(x):
+func take_damage(x):
 	health -= x
 	if health <= 0.0:
 		queue_free()
