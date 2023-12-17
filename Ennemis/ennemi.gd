@@ -15,7 +15,8 @@ func take_damage(x):
 	health -= x
 	if health <= 0.0:
 		$Hurtbox.queue_free()
-		$MosterRabbit.queue_free()
+		$MosterRabbit.texture=ResourceLoader.load("res://Ennemis/tache de sang.png")
+		$MosterRabbit.scale = Vector2(0.6,0.6)
 		$Mort.play()
 		$Mort.connect("finished",mort)
 func mort():
