@@ -1,7 +1,8 @@
 extends CharacterBody2D
 @export var speed = 40.0
 @export var health = 20.0
-
+@export var xpValue = 50
+@export var currentWorld:Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -14,6 +15,7 @@ func _physics_process(delta):
 func take_damage(x):
 	health -= x
 	if health <= 0.0:
+		currentWorld.gain_xp(xpValue)
 		$Hurtbox.queue_free()
 		$MosterRabbit.texture=ResourceLoader.load("res://Ennemis/tache de sang.png")
 		$MosterRabbit.scale = Vector2(0.6,0.6)

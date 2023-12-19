@@ -1,5 +1,9 @@
+
 extends CharacterBody2D
 
+@export var Niveau = 1
+@export var experience = 0
+@export var currentLvl:Node2D
 var bulle = preload("res://Armes/bulle.tscn")
 var vague = preload("res://Armes/vague.tscn")
 const SPEED = 300.0
@@ -31,6 +35,7 @@ func _physics_process(delta):
 
 func _ready():
 	attack()
+	
 	
 func attack():
 	var timerAtckBulle := Timer.new()
@@ -64,3 +69,22 @@ func _on_attack_timer_vague_timeout():
 	attaque1.rotate180()
 	add_child(attaque1)
 	add_child(attaque2)
+
+func gain_xp(xp):
+	experience += xp
+	if(experience>=get_max_xp()):
+		gain_niveau()
+	currentLvl.set_xp(experience)
+	
+func gain_niveau():
+	var residualxp = experience - get_max_xp()
+	Niveau+= 1
+	experience = residualxp
+	currentLvl.set_niveau(Niveau)
+	currentLvl.set_max_xp(get_max_xp())
+	currentLvl.set_xp(experience)
+	
+func get_max_xp():
+	return Niveau*100
+	
+	
