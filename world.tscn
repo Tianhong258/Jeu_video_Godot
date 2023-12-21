@@ -57,8 +57,10 @@ stretch_mode = 1
 
 [node name="Ennemi" parent="." node_paths=PackedStringArray("currentWorld") instance=ExtResource("5_xkr1e")]
 position = Vector2(948, 269)
+xpValue = 100
 currentWorld = NodePath("..")
 
 [node name="Ennemi2" parent="." node_paths=PackedStringArray("currentWorld") instance=ExtResource("5_xkr1e")]
 position = Vector2(1068, 473)
+xpValue = 50000
 currentWorld = NodePath("..")

@@ -1,7 +1,8 @@
 extends CharacterBody2D
 @export var speed = 500.0
-@export var nbHits = 5
+@export var nbHits = 3
 @export var direction:Vector2
+@export var damage = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

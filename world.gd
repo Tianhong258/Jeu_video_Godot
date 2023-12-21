@@ -25,6 +25,14 @@ func set_max_xp(max_xp):
 
 func set_niveau(niveau):
 	UI.niveau = niveau
-	
+
+func lvl_up(liste_skills):
+	set_niveau(get_player().Niveau)
+	get_tree().paused = true
+	UI.show_lvl_up(liste_skills)
+
 func gain_xp(value):
 	get_player().gain_xp(value)
+
+func unpause():
+	get_tree().paused = false

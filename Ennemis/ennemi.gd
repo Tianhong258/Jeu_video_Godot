@@ -29,3 +29,5 @@ func _on_hurtbox_area_entered(area):
 		return
 	if not area.owner.get("damage") == null:
 		take_damage(area.owner.damage)
+	if area.owner.has_method("enemy_hit"):
+		area.owner.enemy_hit(1)

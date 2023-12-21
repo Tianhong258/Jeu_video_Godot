@@ -1,7 +1,6 @@
-
 extends CharacterBody2D
 
-@export var Niveau = 1
+@export var Niveau:int = 1
 @export var experience = 0
 @export var currentLvl:Node2D
 var bulle = preload("res://Armes/bulle.tscn")
@@ -11,7 +10,7 @@ const JUMP_VELOCITY = -400.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+var skills = []
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -72,19 +71,44 @@ func _on_attack_timer_vague_timeout():
 
 func gain_xp(xp):
 	experience += xp
-	if(experience>=get_max_xp()):
-		gain_niveau()
+	check_gain_niveau()
 	currentLvl.set_xp(experience)
 	
+func check_gain_niveau():
+	if(experience>=get_max_xp()):
+		gain_niveau()
+		
+	
+
 func gain_niveau():
 	var residualxp = experience - get_max_xp()
 	Niveau+= 1
 	experience = residualxp
-	currentLvl.set_niveau(Niveau)
+	currentLvl.lvl_up(get_bonus_skills())
 	currentLvl.set_max_xp(get_max_xp())
 	currentLvl.set_xp(experience)
-	
+
 func get_max_xp():
 	return Niveau*100
 	
 	
+func get_bonus_skills():
+	var liste_des_skills = SkillList.liste_skills
+	var skills_proposes = [] 
+	for i in range(3):
+		var skill_recup = liste_des_skills[randi_range(1,len(liste_des_skills))-1]
+		var skill_a_ajouter = Skill.new(skill_recup.img,skill_recup.name,skill_recup.description)
+		var rarity = randi_range(0,100)
+		if(rarity<60):
+			skill_a_ajouter.rarity = Skill.RARITY.COMMON
+		elif(rarity<85):
+			skill_a_ajouter.rarity = Skill.RARITY.UNCOMMON
+		elif(rarity<95):
+			skill_a_ajouter.rarity = Skill.RARITY.RARE
+		elif(rarity<99):
+			skill_a_ajouter.rarity = Skill.RARITY.EPIC
+		else:
+			skill_a_ajouter.rarity = Skill.RARITY.LEGENDARY
+		skills_proposes.append(skill_a_ajouter)
+	
+	return skills_proposes

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://2u53c63a0pg4"]
+[gd_scene load_steps=6 format=3 uid="uid://2u53c63a0pg4"]
 
 [ext_resource type="Script" path="res://Armes/vague.gd" id="1_ow4g6"]
 [ext_resource type="Texture2D" uid="uid://b4s8xp4b5vb1x" path="res://Armes/Vague.png" id="2_7koft"]
 [ext_resource type="AudioStream" uid="uid://b35oagqawxgon" path="res://Armes/goute.wav" id="3_dwtki"]
+[ext_resource type="Script" path="res://Util/Hitbox.gd" id="4_sibt2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy4jy"]
 size = Vector2(86, 10)
@@ -22,13 +23,18 @@ stream = ExtResource("3_dwtki")
 volume_db = -14.793
 autoplay = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -5)
-shape = SubResource("RectangleShape2D_sy4jy")
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 8.0
 one_shot = true
 autostart = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("4_sibt2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, -5)
+shape = SubResource("RectangleShape2D_sy4jy")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
